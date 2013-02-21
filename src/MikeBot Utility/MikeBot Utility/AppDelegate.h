@@ -8,11 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "MikeBotDiscovery.h"
+#import "MikeBotScanner.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, MikeBotScannerDelegate>
 {
-    MikeBotDiscovery * discovery;
+    MikeBotScanner * scanner;
 }
 
 @property (assign) IBOutlet NSWindow *window;

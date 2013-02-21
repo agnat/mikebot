@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "MikeBotDevice.h"
+
 @implementation AppDelegate
 
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -17,9 +19,24 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
-    discovery = [[MikeBotDiscovery alloc] init];
-    [discovery discover];
+    scanner = [[MikeBotScanner alloc] init];
+    scanner.delegate = self;
+    [scanner startScanning];
 }
+
+- (void) didAddDevice: (MikeBotDevice*) device {
+    NSLog(@"AppDelegate didAddDevice: %@", device.ttyDeviceFilename);
+}
+
+- (void) didRemoveDevice: (MikeBotDevice*) device {
+    NSLog(@"AppDelegate didRemoveDevice");
+}
+
+
+
+
+
+
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "de.mikebot.MikeBot_Utility" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory

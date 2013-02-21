@@ -10,7 +10,7 @@
 
 @class MikeBotDevice;
 
-@protocol DiscoveryDelegate <NSObject>
+@protocol MikeBotScannerDelegate <NSObject>
 
 - (void) didAddDevice: (MikeBotDevice*) device;
 - (void) didRemoveDevice: (MikeBotDevice*) device;

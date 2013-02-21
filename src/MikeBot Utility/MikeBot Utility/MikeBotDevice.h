@@ -10,13 +10,15 @@
 
 #import <IOKit/usb/IOUSBLib.h>
 
-@class MikeBotDiscovery;
+@class MikeBotScanner;
 
 @interface MikeBotDevice : NSObject
 
+@property (nonatomic, retain) NSString* ttyDeviceFilename;
+
 @property (assign) IOUSBDeviceInterface **deviceInterface;
 @property (assign) io_object_t notification;
-@property (nonatomic, retain) MikeBotDiscovery* scanner;
+@property (nonatomic, retain) MikeBotScanner* scanner;
 
 - (IOUSBDeviceInterface***) deviceInterfacePtr;
 - (io_object_t*) notificationPtr;

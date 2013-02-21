@@ -14,7 +14,7 @@
 		63147F1216D6651500DF74A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F1116D6651500DF74A2 /* AppDelegate.m */; };
 		63147F1516D6651500DF74A2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63147F1316D6651500DF74A2 /* MainMenu.xib */; };
 		63147F1816D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63147F1616D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld */; };
-		63147F3A16D67B2400DF74A2 /* MikeBotDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F3916D67B2400DF74A2 /* MikeBotDiscovery.m */; };
+		63147F3A16D67B2400DF74A2 /* MikeBotScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F3916D67B2400DF74A2 /* MikeBotScanner.m */; };
 		63147F3D16D6815100DF74A2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63147F3C16D6815000DF74A2 /* IOKit.framework */; };
 		63147F4116D6932900DF74A2 /* MikeBotDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F4016D6932900DF74A2 /* MikeBotDevice.m */; };
 /* End PBXBuildFile section */
@@ -34,11 +34,11 @@
 		63147F1116D6651500DF74A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		63147F1416D6651500DF74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		63147F1716D6651500DF74A2 /* MikeBot_Utility.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MikeBot_Utility.xcdatamodel; sourceTree = "<group>"; };
-		63147F3816D67B2400DF74A2 /* MikeBotDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBotDiscovery.h; sourceTree = "<group>"; };
-		63147F3916D67B2400DF74A2 /* MikeBotDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBotDiscovery.m; sourceTree = "<group>"; };
+		63147F3816D67B2400DF74A2 /* MikeBotScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBotScanner.h; sourceTree = "<group>"; };
+		63147F3916D67B2400DF74A2 /* MikeBotScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBotScanner.m; sourceTree = "<group>"; };
 		63147F3B16D67C7100DF74A2 /* usb_product_and_vendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = usb_product_and_vendor.h; path = ../../firmware/usb_product_and_vendor.h; sourceTree = "<group>"; };
 		63147F3C16D6815000DF74A2 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		63147F3E16D682BD00DF74A2 /* DiscoveryDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoveryDelegate.h; sourceTree = "<group>"; };
+		63147F3E16D682BD00DF74A2 /* MikeBotScannerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MikeBotScannerDelegate.h; sourceTree = "<group>"; };
 		63147F3F16D6932900DF74A2 /* MikeBotDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBotDevice.h; sourceTree = "<group>"; };
 		63147F4016D6932900DF74A2 /* MikeBotDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBotDevice.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,13 +98,13 @@
 			children = (
 				63147F1016D6651500DF74A2 /* AppDelegate.h */,
 				63147F1116D6651500DF74A2 /* AppDelegate.m */,
-				63147F3E16D682BD00DF74A2 /* DiscoveryDelegate.h */,
 				63147F1316D6651500DF74A2 /* MainMenu.xib */,
 				63147F1616D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld */,
 				63147F3F16D6932900DF74A2 /* MikeBotDevice.h */,
 				63147F4016D6932900DF74A2 /* MikeBotDevice.m */,
-				63147F3816D67B2400DF74A2 /* MikeBotDiscovery.h */,
-				63147F3916D67B2400DF74A2 /* MikeBotDiscovery.m */,
+				63147F3816D67B2400DF74A2 /* MikeBotScanner.h */,
+				63147F3916D67B2400DF74A2 /* MikeBotScanner.m */,
+				63147F3E16D682BD00DF74A2 /* MikeBotScannerDelegate.h */,
 				63147F0516D6651500DF74A2 /* Supporting Files */,
 				63147F3B16D67C7100DF74A2 /* usb_product_and_vendor.h */,
 			);
@@ -190,7 +190,7 @@
 				63147F0B16D6651500DF74A2 /* main.m in Sources */,
 				63147F1216D6651500DF74A2 /* AppDelegate.m in Sources */,
 				63147F1816D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld in Sources */,
-				63147F3A16D67B2400DF74A2 /* MikeBotDiscovery.m in Sources */,
+				63147F3A16D67B2400DF74A2 /* MikeBotScanner.m in Sources */,
 				63147F4116D6932900DF74A2 /* MikeBotDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

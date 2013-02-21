@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DiscoveryDelegate.h"
+#import "MikeBotScannerDelegate.h"
 
 @class MikeBotDevice;
 
-@interface MikeBotDiscovery : NSObject
+@interface MikeBotScanner : NSObject
 {
     IONotificationPortRef notificationPort;
     BOOL                  isScanning;
     io_iterator_t         deviceIterator;
 }
 
-@property (nonatomic, retain) id<DiscoveryDelegate> delegate;
+@property (nonatomic, retain) id<MikeBotScannerDelegate> delegate;
 
-- (void) discover;
-- (void) stop;
+- (void) startScanning;
+- (void) stopScanning;
 
 - (void) didAddDevice: (io_iterator_t) iter;
 - (void) didRemoveDevice: (MikeBotDevice*) device;
