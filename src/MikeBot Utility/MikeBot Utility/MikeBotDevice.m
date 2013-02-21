@@ -8,28 +8,63 @@
 
 #import "MikeBotDevice.h"
 
+#import <IOKit/IOCFPlugIn.h>
+#import <IOKit/IOMessage.h>
 #import <IOKit/serial/IOSerialKeys.h>
+
+#import "MikeBotScanner.h"
 
 @implementation MikeBotDevice
 
-- (IOUSBDeviceInterface***) deviceInterfacePtr {
-    return & _deviceInterface;
-}
+- (id) initWithService: (io_service_t) service andScanner: (MikeBotScanner*) scanner {
+    self = [super init];
+    if (self != nil) {
+        self.scanner = scanner;
+        
+        kern_return_t kr;
+        IOCFPlugInInterface 	**plugInInterface=NULL;
+        SInt32 			score;
+        HRESULT 			res;
 
-- (io_object_t*) notificationPtr {
-    return & _notification;
+        kr = IOCreatePlugInInterfaceForService(service, kIOUSBDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
+
+        if ((kIOReturnSuccess != kr) || !plugInInterface) {
+            NSLog(@"unable to create a plugin (%08x)", kr);
+        }
+
+        res = (*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID), (LPVOID)& deviceInterface);
+        (*plugInInterface)->Release(plugInInterface);			// done with this
+        if (res || ! deviceInterface) {
+            NSLog(@"couldn't create a device interface (%08x)", (int) res);
+        }
+
+        kr = IOServiceAddInterestNotification(scanner.notificationPort,			// notifyPort
+                                              service,			// service
+                                              kIOGeneralInterest,		// interestType
+                                              device_removed,		// callback
+                                              (void*)CFBridgingRetain(self),			// refCon
+                                              &notification	// notification
+                                              );
+
+        if (KERN_SUCCESS != kr)
+        {
+            NSLog(@"IOServiceAddInterestNotification returned 0x%08x", kr);
+        }
+
+    }
+    return self;
 }
 
 - (void) dealloc {
     NSLog(@"MikeBotDevice dealloc");
     kern_return_t kr;
-    if ( _deviceInterface ) {
-        kr = (*_deviceInterface)->Release(_deviceInterface);
+    if ( deviceInterface ) {
+        kr = (*deviceInterface)->Release(deviceInterface);
         if (kr != KERN_SUCCESS) {
             NSLog(@"failed to release device interface");
         }
     }
-    kr = IOObjectRelease(_notification);
+    kr = IOObjectRelease(notification);
     if (kr != KERN_SUCCESS) {
         NSLog(@"failed to release notification");
     }
@@ -53,7 +88,7 @@
     request.bInterfaceProtocol = kIOUSBFindInterfaceDontCare;
     request.bAlternateSetting = kIOUSBFindInterfaceDontCare;
 
-    kr = (*_deviceInterface)->CreateInterfaceIterator(_deviceInterface,
+    kr = (*deviceInterface)->CreateInterfaceIterator(deviceInterface,
                                             &request, &iterator);
     while ((usbInterface = IOIteratorNext(iterator))) {
         io_registry_entry_t child;
@@ -73,5 +108,18 @@
         break;
     }
 }
+
+#pragma mark - Core Foundation C Callbacks
+
+void device_removed(void * refcon, io_service_t service, natural_t messageType, void *	messageArgument) {
+    if (messageType == kIOMessageServiceIsTerminated) {
+        MikeBotDevice * device = (__bridge MikeBotDevice *)(refcon);
+
+        [device.scanner didRemoveDevice: device];
+
+        CFBridgingRelease(refcon);
+    }
+}
+
 
 @end

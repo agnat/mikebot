@@ -8,7 +8,6 @@
 
 #import "MikeBotScanner.h"
 
-#import <IOKit/IOMessage.h>
 #import <IOKit/IOCFPlugIn.h>
 #import <IOKit/usb/IOUSBLib.h>
 
@@ -38,9 +37,9 @@
     CFRelease(numberRef);
     numberRef = NULL;
 
-    notificationPort = IONotificationPortCreate(kIOMasterPortDefault);
-    CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notificationPort), kCFRunLoopCommonModes);
-    IOServiceAddMatchingNotification(notificationPort, kIOFirstMatchNotification, matchingDict, (IOServiceMatchingCallback)device_added, (__bridge void *)(self), &deviceIterator);
+    self.notificationPort = IONotificationPortCreate(kIOMasterPortDefault);
+    CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(self.notificationPort), kCFRunLoopCommonModes);
+    IOServiceAddMatchingNotification(self.notificationPort, kIOFirstMatchNotification, matchingDict, (IOServiceMatchingCallback)device_added, (__bridge void *)(self), &deviceIterator);
 
     device_added( self, deviceIterator);
     isScanning = YES;
@@ -48,8 +47,8 @@
 
 - (void) stopScanning {
     if (isScanning) {
-        CFRunLoopRemoveSource(CFRunLoopGetMain(), IONotificationPortGetRunLoopSource(notificationPort), kCFRunLoopDefaultMode);
-        IONotificationPortDestroy(notificationPort);
+        CFRunLoopRemoveSource(CFRunLoopGetMain(), IONotificationPortGetRunLoopSource(self.notificationPort), kCFRunLoopDefaultMode);
+        IONotificationPortDestroy(self.notificationPort);
         IOObjectRelease(deviceIterator);
         isScanning = NO;
     }
@@ -59,42 +58,9 @@
 
     kern_return_t		kr;
     io_service_t		usbDevice;
-    IOCFPlugInInterface 	**plugInInterface=NULL;
-    SInt32 			score;
-    HRESULT 			res;
 
     while ( (usbDevice = IOIteratorNext(iterator)) ) {
-        kr = IOCreatePlugInInterfaceForService(usbDevice, kIOUSBDeviceUserClientTypeID, kIOCFPlugInInterfaceID, &plugInInterface, &score);
-
-        if ((kIOReturnSuccess != kr) || !plugInInterface)
-        {
-            NSLog(@"unable to create a plugin (%08x)", kr);
-            continue;
-        }
-
-        MikeBotDevice * device = [[MikeBotDevice alloc] init];
-        device.scanner = self;
-        
-        res = (*plugInInterface)->QueryInterface(plugInInterface, CFUUIDGetUUIDBytes(kIOUSBDeviceInterfaceID), (LPVOID)[device deviceInterfacePtr]);
-        (*plugInInterface)->Release(plugInInterface);			// done with this
-        if (res || ! device.deviceInterface)
-        {
-            NSLog(@"couldn't create a device interface (%08x)", (int) res);
-            continue;
-        }
-
-        kr = IOServiceAddInterestNotification(notificationPort,			// notifyPort
-                                              usbDevice,			// service
-                                              kIOGeneralInterest,		// interestType
-                                              device_removed,		// callback
-                                              (void*)CFBridgingRetain(device),			// refCon
-                                              [device notificationPtr]	// notification
-                                              );
-
-        if (KERN_SUCCESS != kr)
-        {
-            NSLog(@"IOServiceAddInterestNotification returned 0x%08x", kr);
-        }
+        MikeBotDevice * device = [[MikeBotDevice alloc] initWithService: usbDevice andScanner: self];
 
         kr = IOObjectRelease(usbDevice);
 
@@ -116,14 +82,5 @@ void device_added(MikeBotScanner * self, io_iterator_t iter) {
     [self didAddDevice: iter];
 }
 
-void device_removed(void * refcon, io_service_t service, natural_t messageType, void *	messageArgument) {
-    if (messageType == kIOMessageServiceIsTerminated) {
-        MikeBotDevice * device = (__bridge MikeBotDevice *)(refcon);
-        
-        [device.scanner didRemoveDevice: device];
-        
-        CFBridgingRelease(refcon);
-    }
-}
 
 @end

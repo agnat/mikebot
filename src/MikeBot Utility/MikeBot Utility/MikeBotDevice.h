@@ -13,16 +13,15 @@
 @class MikeBotScanner;
 
 @interface MikeBotDevice : NSObject
+{
+    IOUSBDeviceInterface **deviceInterface;
+    io_object_t notification;
+}
 
-@property (nonatomic, retain) NSString* ttyDeviceFilename;
-
-@property (assign) IOUSBDeviceInterface **deviceInterface;
-@property (assign) io_object_t notification;
+@property (nonatomic, retain) NSString*       ttyDeviceFilename;
 @property (nonatomic, retain) MikeBotScanner* scanner;
 
-- (IOUSBDeviceInterface***) deviceInterfacePtr;
-- (io_object_t*) notificationPtr;
-
+- (id) initWithService: (io_service_t) service andScanner: (MikeBotScanner*) scanner;
 - (void) dealloc;
 
 @end

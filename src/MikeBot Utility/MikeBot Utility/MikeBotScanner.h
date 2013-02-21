@@ -14,12 +14,12 @@
 
 @interface MikeBotScanner : NSObject
 {
-    IONotificationPortRef notificationPort;
     BOOL                  isScanning;
     io_iterator_t         deviceIterator;
 }
 
 @property (nonatomic, retain) id<MikeBotScannerDelegate> delegate;
+@property (assign)            IONotificationPortRef      notificationPort;
 
 - (void) startScanning;
 - (void) stopScanning;
