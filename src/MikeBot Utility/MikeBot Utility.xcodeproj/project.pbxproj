@@ -17,6 +17,10 @@
 		63147F3A16D67B2400DF74A2 /* MikeBotScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F3916D67B2400DF74A2 /* MikeBotScanner.m */; };
 		63147F3D16D6815100DF74A2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63147F3C16D6815000DF74A2 /* IOKit.framework */; };
 		63147F4116D6932900DF74A2 /* MikeBotDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F4016D6932900DF74A2 /* MikeBotDevice.m */; };
+		63147F4416D6BA1400DF74A2 /* MikeBot.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F4316D6BA1400DF74A2 /* MikeBot.m */; };
+		63147F4916D6D8E400DF74A2 /* microphone-icon-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 63147F4616D6D8E400DF74A2 /* microphone-icon-1.png */; };
+		63147F4A16D6D8E400DF74A2 /* Microphone-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 63147F4716D6D8E400DF74A2 /* Microphone-icon.png */; };
+		63147F4B16D6D8E400DF74A2 /* Vintage Microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 63147F4816D6D8E400DF74A2 /* Vintage Microphone.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +45,11 @@
 		63147F3E16D682BD00DF74A2 /* MikeBotScannerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MikeBotScannerDelegate.h; sourceTree = "<group>"; };
 		63147F3F16D6932900DF74A2 /* MikeBotDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBotDevice.h; sourceTree = "<group>"; };
 		63147F4016D6932900DF74A2 /* MikeBotDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBotDevice.m; sourceTree = "<group>"; };
+		63147F4216D6BA1400DF74A2 /* MikeBot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBot.h; sourceTree = "<group>"; };
+		63147F4316D6BA1400DF74A2 /* MikeBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBot.m; sourceTree = "<group>"; };
+		63147F4616D6D8E400DF74A2 /* microphone-icon-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone-icon-1.png"; sourceTree = "<group>"; };
+		63147F4716D6D8E400DF74A2 /* Microphone-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Microphone-icon.png"; sourceTree = "<group>"; };
+		63147F4816D6D8E400DF74A2 /* Vintage Microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vintage Microphone.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +105,13 @@
 		63147F0416D6651500DF74A2 /* MikeBot Utility */ = {
 			isa = PBXGroup;
 			children = (
+				63147F4516D6D8E400DF74A2 /* Assets */,
 				63147F1016D6651500DF74A2 /* AppDelegate.h */,
 				63147F1116D6651500DF74A2 /* AppDelegate.m */,
 				63147F1316D6651500DF74A2 /* MainMenu.xib */,
 				63147F1616D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld */,
+				63147F4216D6BA1400DF74A2 /* MikeBot.h */,
+				63147F4316D6BA1400DF74A2 /* MikeBot.m */,
 				63147F3F16D6932900DF74A2 /* MikeBotDevice.h */,
 				63147F4016D6932900DF74A2 /* MikeBotDevice.m */,
 				63147F3816D67B2400DF74A2 /* MikeBotScanner.h */,
@@ -121,6 +133,16 @@
 				63147F0D16D6651500DF74A2 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		63147F4516D6D8E400DF74A2 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				63147F4616D6D8E400DF74A2 /* microphone-icon-1.png */,
+				63147F4716D6D8E400DF74A2 /* Microphone-icon.png */,
+				63147F4816D6D8E400DF74A2 /* Vintage Microphone.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +199,9 @@
 				63147F0916D6651500DF74A2 /* InfoPlist.strings in Resources */,
 				63147F0F16D6651500DF74A2 /* Credits.rtf in Resources */,
 				63147F1516D6651500DF74A2 /* MainMenu.xib in Resources */,
+				63147F4916D6D8E400DF74A2 /* microphone-icon-1.png in Resources */,
+				63147F4A16D6D8E400DF74A2 /* Microphone-icon.png in Resources */,
+				63147F4B16D6D8E400DF74A2 /* Vintage Microphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +217,7 @@
 				63147F1816D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld in Sources */,
 				63147F3A16D67B2400DF74A2 /* MikeBotScanner.m in Sources */,
 				63147F4116D6932900DF74A2 /* MikeBotDevice.m in Sources */,
+				63147F4416D6BA1400DF74A2 /* MikeBot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

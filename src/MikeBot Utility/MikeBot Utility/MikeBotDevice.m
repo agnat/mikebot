@@ -51,6 +51,11 @@
             NSLog(@"IOServiceAddInterestNotification returned 0x%08x", kr);
         }
 
+        CFTypeRef serialNumber = IORegistryEntryCreateCFProperty(service, CFSTR(kUSBSerialNumberString),kCFAllocatorDefault,0);
+        if (serialNumber) {
+            self.serialNumber = CFBridgingRelease(serialNumber);
+        }
+
     }
     return self;
 }
@@ -96,13 +101,9 @@
         IORegistryEntryGetChildEntry(child, kIOServicePlane, & child );
         IORegistryEntryGetChildEntry(child, kIOServicePlane, & child );
 
-        CFTypeRef deviceNameAsCFString;
-        deviceNameAsCFString = IORegistryEntryCreateCFProperty (
-                                                                child,
-                                                                CFSTR(kIODialinDeviceKey),
-                                                                kCFAllocatorDefault,0);
-        if (deviceNameAsCFString) {
-            self.ttyDeviceFilename = CFBridgingRelease(deviceNameAsCFString);
+        CFTypeRef ttyFilename = IORegistryEntryCreateCFProperty(child, CFSTR(kIODialinDeviceKey),kCFAllocatorDefault,0);
+        if (ttyFilename) {
+            self.ttyDeviceFilename = CFBridgingRelease(ttyFilename);
         }
         kr = IOObjectRelease(usbInterface);
         break;

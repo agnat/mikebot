@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "MikeBotDevice.h"
+#import "MikeBot.h"
 
 @implementation AppDelegate
 
@@ -24,18 +25,43 @@
     [scanner startScanning];
 }
 
+
 - (void) didAddDevice: (MikeBotDevice*) device {
-    NSLog(@"AppDelegate didAddDevice: %@", device.ttyDeviceFilename);
+    NSLog(@"AppDelegate didAddDevice - serial: %@ tty: %@", device.serialNumber, device.ttyDeviceFilename);
+
+    if ( ! [self deviceIsKnown: device]) {
+        [self addNewDevice: device];
+    } else {
+        NSLog(@"device is known");
+    }
 }
 
 - (void) didRemoveDevice: (MikeBotDevice*) device {
     NSLog(@"AppDelegate didRemoveDevice");
 }
 
+- (void) addNewDevice: (MikeBotDevice*) device {
+    NSLog(@"Adding new device: %@", device.serialNumber);
+    MikeBot * newDevice = [NSEntityDescription
+                           insertNewObjectForEntityForName:@"MikeBot"
+                           inManagedObjectContext: self.managedObjectContext];
+    newDevice.serialNumber = device.serialNumber;
+    newDevice.name = @"MikeBot";
+}
 
+- (BOOL) deviceIsKnown: (MikeBotDevice*) device {
+    NSDictionary * vars = @{ @"serial" : device.serialNumber };
+    NSFetchRequest *request = [self.managedObjectModel fetchRequestFromTemplateWithName:@"MikeBotBySerialNumber" substitutionVariables: vars];
 
-
-
+    NSError *error = nil;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&error];
+    if (results != nil) {
+        return [results count] != 0 ? YES : NO;
+    } else {
+        NSLog(@"ERROR %@", error);
+    }
+    return YES;
+}
 
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "de.mikebot.MikeBot_Utility" in the user's Application Support directory.

@@ -18,6 +18,7 @@
     io_object_t notification;
 }
 
+@property (nonatomic, retain) NSString*       serialNumber;
 @property (nonatomic, retain) NSString*       ttyDeviceFilename;
 @property (nonatomic, retain) MikeBotScanner* scanner;
 
