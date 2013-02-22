@@ -1,0 +1,16 @@
+#!/bin/bash
+PORT=/dev/tty.usbmodem*
+echo "starting bootloader at $PORT"
+
+python -c "
+import serial, sys
+ser = serial.Serial(sys.argv[1], 115200, timeout=1)
+ser.write('b')" $PORT
+
+echo "waiting..."
+sleep 3
+echo "flashing firmware"
+make dfu
+sleep 2
+
+dfu-programmer atmega32u4 start
