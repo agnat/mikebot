@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "MikeBotDevice.h"
+#import "USBDevice.h"
 #import "MikeBot.h"
 
 @implementation AppDelegate
@@ -20,49 +20,75 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
-    scanner = [[MikeBotScanner alloc] init];
+    scanner = [[USBScanner alloc] init];
     scanner.delegate = self;
     [scanner startScanning];
+
+    [self.mikeBotArray addObserver:self forKeyPath:@"selectionIndexes" options:NSKeyValueObservingOptionNew context:nil];
+    [self didChangeDevice];
+
 }
 
 
-- (void) didAddDevice: (MikeBotDevice*) device {
-    NSLog(@"AppDelegate didAddDevice - serial: %@ tty: %@", device.serialNumber, device.ttyDeviceFilename);
+- (void) didAddDevice: (USBDevice*) usbDevice {
+    NSLog(@"AppDelegate didAddDevice - serial: %@ tty: %@", usbDevice.serialNumber, usbDevice.ttyDeviceFilename);
 
-    if ( ! [self deviceIsKnown: device]) {
-        [self addNewDevice: device];
+    MikeBot * device = [self deviceBySerialNumber: usbDevice];
+    if ( device == nil) {
+        device = [self createNewDevice: usbDevice];
     } else {
         NSLog(@"device is known");
     }
+    device.isPresentOnUSB = @1;
+    [self didChangeDevice];
 }
 
-- (void) didRemoveDevice: (MikeBotDevice*) device {
+- (void) didRemoveDevice: (USBDevice*) usbDevice {
     NSLog(@"AppDelegate didRemoveDevice");
+    MikeBot * device = [self deviceBySerialNumber: usbDevice];
+    device.isPresentOnUSB = @0;
+    [self didChangeDevice];
 }
 
-- (void) addNewDevice: (MikeBotDevice*) device {
+- (MikeBot*) createNewDevice: (USBDevice*) device {
     NSLog(@"Adding new device: %@", device.serialNumber);
     MikeBot * newDevice = [NSEntityDescription
                            insertNewObjectForEntityForName:@"MikeBot"
                            inManagedObjectContext: self.managedObjectContext];
     newDevice.serialNumber = device.serialNumber;
     newDevice.name = @"MikeBot";
+    newDevice.subtitle = @"Studio A";
+    return newDevice;
 }
 
-- (BOOL) deviceIsKnown: (MikeBotDevice*) device {
+- (MikeBot*) deviceBySerialNumber: (USBDevice*) device {
     NSDictionary * vars = @{ @"serial" : device.serialNumber };
     NSFetchRequest *request = [self.managedObjectModel fetchRequestFromTemplateWithName:@"MikeBotBySerialNumber" substitutionVariables: vars];
 
     NSError *error = nil;
     NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&error];
     if (results != nil) {
-        return [results count] != 0 ? YES : NO;
+        return [results count] == 0 ? nil : [results objectAtIndex: 0];
     } else {
         NSLog(@"ERROR %@", error);
     }
-    return YES;
+    return nil;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if (object == self.mikeBotArray && [keyPath isEqualToString: @"selectionIndexes"]) {
+        [self didChangeDevice];
+    }
+}
+
+- (void) didChangeDevice {
+    BOOL guiEnabled = [self.mikeBotArray.selectionIndexes count] != 0 && [((MikeBot*)[self.mikeBotArray.selectedObjects objectAtIndex: 0]).isPresentOnUSB isEqualToNumber: @1] ? YES : NO;
+    [self.midiChannelPopUp setEnabled: guiEnabled];
+}
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "de.mikebot.MikeBot_Utility" in the user's Application Support directory.
 - (NSURL *)applicationFilesDirectory
@@ -223,6 +249,10 @@
     }
 
     return NSTerminateNow;
+}
+
+- (void) dealloc {
+    [self.mikeBotArray removeObserver: self forKeyPath: @"selectionIndexes"];
 }
 
 @end

@@ -8,14 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "MikeBotScanner.h"
+#import "USBScanner.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, MikeBotScannerDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, USBScannerDelegate>
 {
-    MikeBotScanner * scanner;
+    USBScanner * scanner;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSArrayController *mikeBotArray;
+@property (assign) IBOutlet NSPopUpButton * midiChannelPopUp;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

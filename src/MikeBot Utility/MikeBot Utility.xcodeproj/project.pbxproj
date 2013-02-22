@@ -14,13 +14,14 @@
 		63147F1216D6651500DF74A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F1116D6651500DF74A2 /* AppDelegate.m */; };
 		63147F1516D6651500DF74A2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63147F1316D6651500DF74A2 /* MainMenu.xib */; };
 		63147F1816D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63147F1616D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld */; };
-		63147F3A16D67B2400DF74A2 /* MikeBotScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F3916D67B2400DF74A2 /* MikeBotScanner.m */; };
+		63147F3A16D67B2400DF74A2 /* USBScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F3916D67B2400DF74A2 /* USBScanner.m */; };
 		63147F3D16D6815100DF74A2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63147F3C16D6815000DF74A2 /* IOKit.framework */; };
-		63147F4116D6932900DF74A2 /* MikeBotDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F4016D6932900DF74A2 /* MikeBotDevice.m */; };
+		63147F4116D6932900DF74A2 /* USBDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F4016D6932900DF74A2 /* USBDevice.m */; };
 		63147F4416D6BA1400DF74A2 /* MikeBot.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F4316D6BA1400DF74A2 /* MikeBot.m */; };
 		63147F4916D6D8E400DF74A2 /* microphone-icon-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 63147F4616D6D8E400DF74A2 /* microphone-icon-1.png */; };
 		63147F4A16D6D8E400DF74A2 /* Microphone-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 63147F4716D6D8E400DF74A2 /* Microphone-icon.png */; };
 		63147F4B16D6D8E400DF74A2 /* Vintage Microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 63147F4816D6D8E400DF74A2 /* Vintage Microphone.png */; };
+		63147F4F16D79D7B00DF74A2 /* LitLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F4E16D79D7B00DF74A2 /* LitLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,18 +39,20 @@
 		63147F1116D6651500DF74A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		63147F1416D6651500DF74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		63147F1716D6651500DF74A2 /* MikeBot_Utility.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MikeBot_Utility.xcdatamodel; sourceTree = "<group>"; };
-		63147F3816D67B2400DF74A2 /* MikeBotScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBotScanner.h; sourceTree = "<group>"; };
-		63147F3916D67B2400DF74A2 /* MikeBotScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBotScanner.m; sourceTree = "<group>"; };
+		63147F3816D67B2400DF74A2 /* USBScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBScanner.h; sourceTree = "<group>"; };
+		63147F3916D67B2400DF74A2 /* USBScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USBScanner.m; sourceTree = "<group>"; };
 		63147F3B16D67C7100DF74A2 /* usb_product_and_vendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = usb_product_and_vendor.h; path = ../../firmware/usb_product_and_vendor.h; sourceTree = "<group>"; };
 		63147F3C16D6815000DF74A2 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		63147F3E16D682BD00DF74A2 /* MikeBotScannerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MikeBotScannerDelegate.h; sourceTree = "<group>"; };
-		63147F3F16D6932900DF74A2 /* MikeBotDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBotDevice.h; sourceTree = "<group>"; };
-		63147F4016D6932900DF74A2 /* MikeBotDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBotDevice.m; sourceTree = "<group>"; };
+		63147F3E16D682BD00DF74A2 /* USBScannerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USBScannerDelegate.h; sourceTree = "<group>"; };
+		63147F3F16D6932900DF74A2 /* USBDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBDevice.h; sourceTree = "<group>"; };
+		63147F4016D6932900DF74A2 /* USBDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USBDevice.m; sourceTree = "<group>"; };
 		63147F4216D6BA1400DF74A2 /* MikeBot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBot.h; sourceTree = "<group>"; };
 		63147F4316D6BA1400DF74A2 /* MikeBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBot.m; sourceTree = "<group>"; };
 		63147F4616D6D8E400DF74A2 /* microphone-icon-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone-icon-1.png"; sourceTree = "<group>"; };
 		63147F4716D6D8E400DF74A2 /* Microphone-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Microphone-icon.png"; sourceTree = "<group>"; };
 		63147F4816D6D8E400DF74A2 /* Vintage Microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vintage Microphone.png"; sourceTree = "<group>"; };
+		63147F4D16D79D7B00DF74A2 /* LitLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LitLabel.h; sourceTree = "<group>"; };
+		63147F4E16D79D7B00DF74A2 /* LitLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LitLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,20 +108,21 @@
 		63147F0416D6651500DF74A2 /* MikeBot Utility */ = {
 			isa = PBXGroup;
 			children = (
-				63147F4516D6D8E400DF74A2 /* Assets */,
 				63147F1016D6651500DF74A2 /* AppDelegate.h */,
 				63147F1116D6651500DF74A2 /* AppDelegate.m */,
+				63147F4516D6D8E400DF74A2 /* Assets */,
 				63147F1316D6651500DF74A2 /* MainMenu.xib */,
-				63147F1616D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld */,
 				63147F4216D6BA1400DF74A2 /* MikeBot.h */,
 				63147F4316D6BA1400DF74A2 /* MikeBot.m */,
-				63147F3F16D6932900DF74A2 /* MikeBotDevice.h */,
-				63147F4016D6932900DF74A2 /* MikeBotDevice.m */,
-				63147F3816D67B2400DF74A2 /* MikeBotScanner.h */,
-				63147F3916D67B2400DF74A2 /* MikeBotScanner.m */,
-				63147F3E16D682BD00DF74A2 /* MikeBotScannerDelegate.h */,
+				63147F1616D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld */,
+				63147F3F16D6932900DF74A2 /* USBDevice.h */,
+				63147F4016D6932900DF74A2 /* USBDevice.m */,
+				63147F3816D67B2400DF74A2 /* USBScanner.h */,
+				63147F3916D67B2400DF74A2 /* USBScanner.m */,
+				63147F3E16D682BD00DF74A2 /* USBScannerDelegate.h */,
 				63147F0516D6651500DF74A2 /* Supporting Files */,
 				63147F3B16D67C7100DF74A2 /* usb_product_and_vendor.h */,
+				63147F4C16D79CBC00DF74A2 /* View */,
 			);
 			path = "MikeBot Utility";
 			sourceTree = "<group>";
@@ -143,6 +147,15 @@
 				63147F4816D6D8E400DF74A2 /* Vintage Microphone.png */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		63147F4C16D79CBC00DF74A2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63147F4D16D79D7B00DF74A2 /* LitLabel.h */,
+				63147F4E16D79D7B00DF74A2 /* LitLabel.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +228,10 @@
 				63147F0B16D6651500DF74A2 /* main.m in Sources */,
 				63147F1216D6651500DF74A2 /* AppDelegate.m in Sources */,
 				63147F1816D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld in Sources */,
-				63147F3A16D67B2400DF74A2 /* MikeBotScanner.m in Sources */,
-				63147F4116D6932900DF74A2 /* MikeBotDevice.m in Sources */,
+				63147F3A16D67B2400DF74A2 /* USBScanner.m in Sources */,
+				63147F4116D6932900DF74A2 /* USBDevice.m in Sources */,
 				63147F4416D6BA1400DF74A2 /* MikeBot.m in Sources */,
+				63147F4F16D79D7B00DF74A2 /* LitLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

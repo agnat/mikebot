@@ -15,5 +15,7 @@
 @property (nonatomic, retain) NSString * serialNumber;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * subtitle;
+@property (nonatomic, retain) NSNumber * isPresentOnUSB;
+@property (nonatomic, retain) NSNumber * isPresentOnMIDI;
 
 @end

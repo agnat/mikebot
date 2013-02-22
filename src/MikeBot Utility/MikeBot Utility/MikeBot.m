@@ -14,5 +14,7 @@
 @dynamic serialNumber;
 @dynamic name;
 @dynamic subtitle;
+@dynamic isPresentOnUSB;
+@dynamic isPresentOnMIDI;
 
 @end
