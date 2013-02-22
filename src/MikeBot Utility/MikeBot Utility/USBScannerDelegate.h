@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class MikeBotDevice;
+@class USBDevice;
 
-@protocol MikeBotScannerDelegate <NSObject>
+@protocol USBScannerDelegate <NSObject>
 
-- (void) didAddDevice: (MikeBotDevice*) device;
-- (void) didRemoveDevice: (MikeBotDevice*) device;
+- (void) didAddDevice: (USBDevice*) usbDevice;
+- (void) didRemoveDevice: (USBDevice*) usbDevice;
 
 @end

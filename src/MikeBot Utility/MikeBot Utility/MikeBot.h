@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSString * subtitle;
 @property (nonatomic, retain) NSNumber * isPresentOnUSB;
 @property (nonatomic, retain) NSNumber * isPresentOnMIDI;
+@property (nonatomic, retain) NSNumber * midiChannel;
 
 @end

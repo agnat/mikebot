@@ -10,6 +10,7 @@
 
 #import "USBDevice.h"
 #import "MikeBot.h"
+#import "CLISession.h"
 
 @implementation AppDelegate
 
@@ -20,6 +21,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
+    sessions = [[NSMutableDictionary alloc] init];
     scanner = [[USBScanner alloc] init];
     scanner.delegate = self;
     [scanner startScanning];
@@ -31,27 +33,23 @@
 
 
 - (void) didAddDevice: (USBDevice*) usbDevice {
-    NSLog(@"AppDelegate didAddDevice - serial: %@ tty: %@", usbDevice.serialNumber, usbDevice.ttyDeviceFilename);
-
     MikeBot * device = [self deviceBySerialNumber: usbDevice];
     if ( device == nil) {
         device = [self createNewDevice: usbDevice];
-    } else {
-        NSLog(@"device is known");
     }
     device.isPresentOnUSB = @1;
+    [sessions setObject: [[CLISession alloc] initWithMikeBot: device usbDevice: usbDevice] forKey: usbDevice.serialNumber];
     [self didChangeDevice];
 }
 
 - (void) didRemoveDevice: (USBDevice*) usbDevice {
-    NSLog(@"AppDelegate didRemoveDevice");
     MikeBot * device = [self deviceBySerialNumber: usbDevice];
     device.isPresentOnUSB = @0;
+    [sessions removeObjectForKey: usbDevice.serialNumber];
     [self didChangeDevice];
 }
 
 - (MikeBot*) createNewDevice: (USBDevice*) device {
-    NSLog(@"Adding new device: %@", device.serialNumber);
     MikeBot * newDevice = [NSEntityDescription
                            insertNewObjectForEntityForName:@"MikeBot"
                            inManagedObjectContext: self.managedObjectContext];
@@ -86,8 +84,14 @@
 }
 
 - (void) didChangeDevice {
-    BOOL guiEnabled = [self.mikeBotArray.selectionIndexes count] != 0 && [((MikeBot*)[self.mikeBotArray.selectedObjects objectAtIndex: 0]).isPresentOnUSB isEqualToNumber: @1] ? YES : NO;
+    BOOL haveSelection = [self.mikeBotArray.selectionIndexes count] != 0 ? YES : NO;
+    BOOL guiEnabled =  haveSelection && [((MikeBot*)[self.mikeBotArray.selectedObjects objectAtIndex: 0]).isPresentOnUSB isEqualToNumber: @1] ? YES : NO;
     [self.midiChannelPopUp setEnabled: guiEnabled];
+
+    if (haveSelection == NO) {
+        self.firmwareVersion.stringValue = @"";
+        self.serialNumber.stringValue = @"";
+    }
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "de.mikebot.MikeBot_Utility" in the user's Application Support directory.

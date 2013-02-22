@@ -16,5 +16,6 @@
 @dynamic subtitle;
 @dynamic isPresentOnUSB;
 @dynamic isPresentOnMIDI;
+@dynamic midiChannel;
 
 @end

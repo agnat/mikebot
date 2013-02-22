@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 David Siegel. All rights reserved.
 //
 
-#import "MikeBotScanner.h"
+#import "USBScanner.h"
 
 #import <IOKit/IOCFPlugIn.h>
 #import <IOKit/usb/IOUSBLib.h>
 
 
 #import "usb_product_and_vendor.h"
-#import "MikeBotDevice.h"
+#import "USBDevice.h"
 
-@implementation MikeBotScanner
+@implementation USBScanner
 
 - (void) startScanning {
     CFMutableDictionaryRef      matchingDict;
@@ -60,7 +60,7 @@
     io_service_t		usbDevice;
 
     while ( (usbDevice = IOIteratorNext(iterator)) ) {
-        MikeBotDevice * device = [[MikeBotDevice alloc] initWithService: usbDevice andScanner: self];
+        USBDevice * device = [[USBDevice alloc] initWithService: usbDevice andScanner: self];
 
         kr = IOObjectRelease(usbDevice);
 
@@ -68,7 +68,7 @@
     }
 }
 
-- (void) didRemoveDevice: (MikeBotDevice*) device {
+- (void) didRemoveDevice: (USBDevice*) device {
     [self.delegate didRemoveDevice: device];
 }
 
@@ -78,7 +78,7 @@
 
 #pragma mark - Core Foundation C Callbacks
 
-void device_added(MikeBotScanner * self, io_iterator_t iter) {
+void device_added(USBScanner * self, io_iterator_t iter) {
     [self didAddDevice: iter];
 }
 

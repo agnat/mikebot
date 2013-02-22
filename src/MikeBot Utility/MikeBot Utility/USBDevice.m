@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 David Siegel. All rights reserved.
 //
 
-#import "MikeBotDevice.h"
+#import "USBDevice.h"
 
 #import <IOKit/IOCFPlugIn.h>
 #import <IOKit/IOMessage.h>
 #import <IOKit/serial/IOSerialKeys.h>
 
-#import "MikeBotScanner.h"
+#import "USBScanner.h"
 
-@implementation MikeBotDevice
+@implementation USBDevice
 
-- (id) initWithService: (io_service_t) service andScanner: (MikeBotScanner*) scanner {
+- (id) initWithService: (io_service_t) service andScanner: (USBScanner*) scanner {
     self = [super init];
     if (self != nil) {
         self.scanner = scanner;
@@ -61,7 +61,6 @@
 }
 
 - (void) dealloc {
-    NSLog(@"MikeBotDevice dealloc");
     kern_return_t kr;
     if ( deviceInterface ) {
         kr = (*deviceInterface)->Release(deviceInterface);
@@ -114,7 +113,7 @@
 
 void device_removed(void * refcon, io_service_t service, natural_t messageType, void *	messageArgument) {
     if (messageType == kIOMessageServiceIsTerminated) {
-        MikeBotDevice * device = (__bridge MikeBotDevice *)(refcon);
+        USBDevice * device = (__bridge USBDevice *)(refcon);
 
         [device.scanner didRemoveDevice: device];
 

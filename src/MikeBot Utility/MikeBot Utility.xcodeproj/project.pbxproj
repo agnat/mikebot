@@ -22,6 +22,10 @@
 		63147F4A16D6D8E400DF74A2 /* Microphone-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 63147F4716D6D8E400DF74A2 /* Microphone-icon.png */; };
 		63147F4B16D6D8E400DF74A2 /* Vintage Microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 63147F4816D6D8E400DF74A2 /* Vintage Microphone.png */; };
 		63147F4F16D79D7B00DF74A2 /* LitLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F4E16D79D7B00DF74A2 /* LitLabel.m */; };
+		63147F5B16D7EA6D00DF74A2 /* CLICommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F5316D7EA6D00DF74A2 /* CLICommand.m */; };
+		63147F5C16D7EA6D00DF74A2 /* CLISession.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F5516D7EA6D00DF74A2 /* CLISession.m */; };
+		63147F5D16D7EA6D00DF74A2 /* ConfigCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F5716D7EA6D00DF74A2 /* ConfigCommand.m */; };
+		63147F5E16D7EA6D00DF74A2 /* SerialPort.m in Sources */ = {isa = PBXBuildFile; fileRef = 63147F5916D7EA6D00DF74A2 /* SerialPort.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,13 +43,13 @@
 		63147F1116D6651500DF74A2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		63147F1416D6651500DF74A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		63147F1716D6651500DF74A2 /* MikeBot_Utility.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MikeBot_Utility.xcdatamodel; sourceTree = "<group>"; };
-		63147F3816D67B2400DF74A2 /* USBScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBScanner.h; sourceTree = "<group>"; };
-		63147F3916D67B2400DF74A2 /* USBScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USBScanner.m; sourceTree = "<group>"; };
+		63147F3816D67B2400DF74A2 /* USBScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = USBScanner.h; path = "MikeBot Utility/USBScanner.h"; sourceTree = SOURCE_ROOT; };
+		63147F3916D67B2400DF74A2 /* USBScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = USBScanner.m; path = "MikeBot Utility/USBScanner.m"; sourceTree = SOURCE_ROOT; };
 		63147F3B16D67C7100DF74A2 /* usb_product_and_vendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = usb_product_and_vendor.h; path = ../../firmware/usb_product_and_vendor.h; sourceTree = "<group>"; };
 		63147F3C16D6815000DF74A2 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		63147F3E16D682BD00DF74A2 /* USBScannerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USBScannerDelegate.h; sourceTree = "<group>"; };
-		63147F3F16D6932900DF74A2 /* USBDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBDevice.h; sourceTree = "<group>"; };
-		63147F4016D6932900DF74A2 /* USBDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USBDevice.m; sourceTree = "<group>"; };
+		63147F3E16D682BD00DF74A2 /* USBScannerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = USBScannerDelegate.h; path = "MikeBot Utility/USBScannerDelegate.h"; sourceTree = SOURCE_ROOT; };
+		63147F3F16D6932900DF74A2 /* USBDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = USBDevice.h; path = "MikeBot Utility/USBDevice.h"; sourceTree = SOURCE_ROOT; };
+		63147F4016D6932900DF74A2 /* USBDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = USBDevice.m; path = "MikeBot Utility/USBDevice.m"; sourceTree = SOURCE_ROOT; };
 		63147F4216D6BA1400DF74A2 /* MikeBot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MikeBot.h; sourceTree = "<group>"; };
 		63147F4316D6BA1400DF74A2 /* MikeBot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MikeBot.m; sourceTree = "<group>"; };
 		63147F4616D6D8E400DF74A2 /* microphone-icon-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone-icon-1.png"; sourceTree = "<group>"; };
@@ -53,6 +57,15 @@
 		63147F4816D6D8E400DF74A2 /* Vintage Microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vintage Microphone.png"; sourceTree = "<group>"; };
 		63147F4D16D79D7B00DF74A2 /* LitLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LitLabel.h; sourceTree = "<group>"; };
 		63147F4E16D79D7B00DF74A2 /* LitLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LitLabel.m; sourceTree = "<group>"; };
+		63147F5216D7EA6D00DF74A2 /* CLICommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLICommand.h; sourceTree = "<group>"; };
+		63147F5316D7EA6D00DF74A2 /* CLICommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLICommand.m; sourceTree = "<group>"; };
+		63147F5416D7EA6D00DF74A2 /* CLISession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLISession.h; sourceTree = "<group>"; };
+		63147F5516D7EA6D00DF74A2 /* CLISession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLISession.m; sourceTree = "<group>"; };
+		63147F5616D7EA6D00DF74A2 /* ConfigCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigCommand.h; sourceTree = "<group>"; };
+		63147F5716D7EA6D00DF74A2 /* ConfigCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigCommand.m; sourceTree = "<group>"; };
+		63147F5816D7EA6D00DF74A2 /* SerialPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialPort.h; sourceTree = "<group>"; };
+		63147F5916D7EA6D00DF74A2 /* SerialPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerialPort.m; sourceTree = "<group>"; };
+		63147F5A16D7EA6D00DF74A2 /* SerialPortDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialPortDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,16 +124,13 @@
 				63147F1016D6651500DF74A2 /* AppDelegate.h */,
 				63147F1116D6651500DF74A2 /* AppDelegate.m */,
 				63147F4516D6D8E400DF74A2 /* Assets */,
+				63147F5116D7E9F700DF74A2 /* CLI */,
 				63147F1316D6651500DF74A2 /* MainMenu.xib */,
 				63147F4216D6BA1400DF74A2 /* MikeBot.h */,
 				63147F4316D6BA1400DF74A2 /* MikeBot.m */,
 				63147F1616D6651500DF74A2 /* MikeBot_Utility.xcdatamodeld */,
-				63147F3F16D6932900DF74A2 /* USBDevice.h */,
-				63147F4016D6932900DF74A2 /* USBDevice.m */,
-				63147F3816D67B2400DF74A2 /* USBScanner.h */,
-				63147F3916D67B2400DF74A2 /* USBScanner.m */,
-				63147F3E16D682BD00DF74A2 /* USBScannerDelegate.h */,
 				63147F0516D6651500DF74A2 /* Supporting Files */,
+				63147F5016D7DC5100DF74A2 /* USB */,
 				63147F3B16D67C7100DF74A2 /* usb_product_and_vendor.h */,
 				63147F4C16D79CBC00DF74A2 /* View */,
 			);
@@ -156,6 +166,34 @@
 				63147F4E16D79D7B00DF74A2 /* LitLabel.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		63147F5016D7DC5100DF74A2 /* USB */ = {
+			isa = PBXGroup;
+			children = (
+				63147F3F16D6932900DF74A2 /* USBDevice.h */,
+				63147F4016D6932900DF74A2 /* USBDevice.m */,
+				63147F3816D67B2400DF74A2 /* USBScanner.h */,
+				63147F3916D67B2400DF74A2 /* USBScanner.m */,
+				63147F3E16D682BD00DF74A2 /* USBScannerDelegate.h */,
+			);
+			path = USB;
+			sourceTree = "<group>";
+		};
+		63147F5116D7E9F700DF74A2 /* CLI */ = {
+			isa = PBXGroup;
+			children = (
+				63147F5216D7EA6D00DF74A2 /* CLICommand.h */,
+				63147F5316D7EA6D00DF74A2 /* CLICommand.m */,
+				63147F5416D7EA6D00DF74A2 /* CLISession.h */,
+				63147F5516D7EA6D00DF74A2 /* CLISession.m */,
+				63147F5616D7EA6D00DF74A2 /* ConfigCommand.h */,
+				63147F5716D7EA6D00DF74A2 /* ConfigCommand.m */,
+				63147F5816D7EA6D00DF74A2 /* SerialPort.h */,
+				63147F5916D7EA6D00DF74A2 /* SerialPort.m */,
+				63147F5A16D7EA6D00DF74A2 /* SerialPortDelegate.h */,
+			);
+			path = CLI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +270,10 @@
 				63147F4116D6932900DF74A2 /* USBDevice.m in Sources */,
 				63147F4416D6BA1400DF74A2 /* MikeBot.m in Sources */,
 				63147F4F16D79D7B00DF74A2 /* LitLabel.m in Sources */,
+				63147F5B16D7EA6D00DF74A2 /* CLICommand.m in Sources */,
+				63147F5C16D7EA6D00DF74A2 /* CLISession.m in Sources */,
+				63147F5D16D7EA6D00DF74A2 /* ConfigCommand.m in Sources */,
+				63147F5E16D7EA6D00DF74A2 /* SerialPort.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

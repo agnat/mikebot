@@ -8,24 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MikeBotScannerDelegate.h"
+#import "USBScannerDelegate.h"
 
-@class MikeBotDevice;
+@class USBDevice;
 
-@interface MikeBotScanner : NSObject
+@interface USBScanner : NSObject
 {
     BOOL                  isScanning;
     io_iterator_t         deviceIterator;
 }
 
-@property (nonatomic, retain) id<MikeBotScannerDelegate> delegate;
-@property (assign)            IONotificationPortRef      notificationPort;
+@property (nonatomic, retain) id<USBScannerDelegate> delegate;
+@property (assign)            IONotificationPortRef  notificationPort;
 
 - (void) startScanning;
 - (void) stopScanning;
 
 - (void) didAddDevice: (io_iterator_t) iter;
-- (void) didRemoveDevice: (MikeBotDevice*) device;
+- (void) didRemoveDevice: (USBDevice*) device;
 
 - (void) dealloc;
 

@@ -13,11 +13,14 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, USBScannerDelegate>
 {
     USBScanner * scanner;
+    NSMutableDictionary * sessions;
 }
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSArrayController *mikeBotArray;
 @property (assign) IBOutlet NSPopUpButton * midiChannelPopUp;
+@property (assign) IBOutlet NSTextField * firmwareVersion;
+@property (assign) IBOutlet NSTextField * serialNumber;
 
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
