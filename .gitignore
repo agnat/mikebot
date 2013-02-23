@@ -2,3 +2,11 @@ xcuserdata
 src/firmware/LUFA-120730
 *.s#?
 *.b#?
+src/firmware/*.d
+src/firmware/*.hex
+src/firmware/*.elf
+src/firmware/*.eep
+src/firmware/*.map
+src/firmware/*.o
+src/firmware/*.sym
+src/firmware/*.lss
