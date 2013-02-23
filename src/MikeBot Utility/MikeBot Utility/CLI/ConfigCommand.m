@@ -22,14 +22,22 @@
 }
 
 - (void) handleResponse:(NSData *)response {
+    //NSLog(@"%@", [[NSString alloc] initWithData: response encoding: NSASCIIStringEncoding]);
     NSError * error = nil;
-    NSDictionary* json = [NSJSONSerialization JSONObjectWithData: response options: 0 error: & error];
-    if (json == nil) {
+    NSDictionary* config = [NSJSONSerialization JSONObjectWithData: response options: 0 error: & error];
+    if (config == nil) {
         NSLog(@"json error: %@", error);
     } else {
-        mikeBot.name = [json objectForKey: @"name"];
-        mikeBot.subtitle = [json objectForKey: @"subtitle"];
-        mikeBot.midiChannel = [json objectForKey: @"midiChannel"];
+        if ( ! [mikeBot.name isEqualToString: [config objectForKey: @"name"]]) {
+            mikeBot.name = [config objectForKey: @"name"];
+        }
+        if ( ! [mikeBot.subtitle isEqualToString: [config objectForKey: @"subtitle"]]) {
+            mikeBot.subtitle = [config objectForKey: @"subtitle"];
+        }
+        if ( ! [mikeBot.midiChannel isEqualToNumber: [config objectForKey: @"midiChannel"]]) {
+            mikeBot.midiChannel = [config objectForKey: @"midiChannel"];
+        }
     }
 }
+
 @end
