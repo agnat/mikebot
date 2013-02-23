@@ -24,9 +24,9 @@ enum {
 
 typedef pin<portb, 3> status_led;
 
-int16_t x_position = center;
-int16_t y_position = center;
-int16_t angle = center;
+uint16_t x_position = center;
+uint16_t y_position = center;
+uint16_t angle = center;
 
 volatile struct misc_flags {
     uint8_t enter_menu_mode: 1;
@@ -40,6 +40,17 @@ uint8_t command_buffer_index = 0;
 
 uint8_t midi_channel_ee EEMEM = 0;
 uint8_t midi_channel = 0;
+
+enum { max_text_length = 64 };
+
+char default_name[] PROGMEM = "MikeBot"; 
+char name_ee[max_text_length] EEMEM;
+uint8_t name_length_ee EEMEM = 0;
+
+char default_subtitle[] PROGMEM = "Monsterstack Left Channel"; 
+char subtitle_ee[max_text_length] EEMEM;
+uint8_t subtitle_length_ee EEMEM = 0;
+
 //uint16_t v_rotary_offset_ee EEMEM;
 
 extern "C" {
@@ -69,6 +80,8 @@ char set_error_unknown_parameter[] PROGMEM = "ERROR: unknown parameter '%s'\r\n"
 char set_error_channel_out_of_range[] PROGMEM = "ERROR: channel out of range\r\n";
 
 char midi_channel_string[] PROGMEM = "midiChannel";
+char name_string[] PROGMEM = "name";
+char subtitle_string[] PROGMEM = "subtitle";
 
 inline
 void
@@ -86,12 +99,23 @@ get_serial_number(char * buffer) {
     buffer[(INTERNAL_SERIAL_LENGTH_BITS / 4)] = '\0';
 }
 
+void
+get_ee_string(uint8_t * ee_length, char * ee_buffer, char * buffer) {
+    uint8_t length = eeprom_read_byte(ee_length);
+    eeprom_read_block(buffer, ee_buffer, length);
+    buffer[length] = '\0';
+}
+
 inline
 void
 config_command(char ** argv) {
     char serial_number[(INTERNAL_SERIAL_LENGTH_BITS / 4) + 1];
+    char name_buffer[max_text_length + 1];
+    char subtitle_buffer[max_text_length + 1];
+    get_ee_string(& name_length_ee, name_ee, name_buffer);
+    get_ee_string(& subtitle_length_ee, subtitle_ee, subtitle_buffer);
     get_serial_number(serial_number);
-    fprintf_P(&out, config_json, serial_number, midi_channel, "MikeBot", "Marshall Left Channel");
+    fprintf_P(&out, config_json, serial_number, midi_channel, name_buffer, subtitle_buffer);
 }
 
 inline
@@ -153,6 +177,18 @@ init_software_clock() {
     TCCR0B |= _BV(CS02) | _BV(CS00); // set prescaler to 1024
 }
 
+void
+init_eeprom_string(PGM_P default_string, uint8_t * ee_length, char * ee_buffer) {
+    uint8_t length = eeprom_read_byte(ee_length);
+    if (length > max_text_length) {
+        char buffer[max_text_length];
+        strcpy_P(buffer, default_string);
+        length = strlen(buffer);
+        eeprom_write_block(buffer, ee_buffer, length);
+        eeprom_write_byte(ee_length, length);
+    }
+}
+
 inline
 void 
 init() {
@@ -188,13 +224,17 @@ init() {
 
     status_led::make_output();
 
-    // Setup done. Enable interrupts.
-    sei();
-
     midi_channel = eeprom_read_byte(&midi_channel_ee);
     if (midi_channel > 15) {
         midi_channel = 0;
     }
+
+    init_eeprom_string(default_name, & name_length_ee, name_ee);
+    init_eeprom_string(default_subtitle, & subtitle_length_ee, subtitle_ee);
+
+    // Setup done. Enable interrupts.
+    sei();
+
 }
 
 inline
@@ -361,7 +401,6 @@ void EVENT_USB_Device_ConfigurationChanged(void) {
 void EVENT_USB_Device_ControlRequest(void) {
     CDC_Device_ProcessControlRequest(&cdc);
     MIDI_Device_ProcessControlRequest(&usb_midi);
-
 }
 
 void EVENT_CDC_Device_LineEncodingChanged(USB_ClassInfo_CDC_Device_t* const cdc_interface_info) {
