@@ -1,3 +1,6 @@
 h1. MikeBot
 
+In (electric) guitar recording the positioning of the microphone in front of the amp or cabinet has a major impact on the sound. MikeBot is a device to adjust the microphone position remotely. It features two linear and one rotational axis. The device has two interfaces: Classic MIDI and MIDI over USB. This repository contains the controller PCB, schematics, firmware and configuration utilities. The mechanical drawings will follow.
+
+Please note that this is work in progress and the board has not been proven yet.
 
